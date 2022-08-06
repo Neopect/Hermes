@@ -1,0 +1,44 @@
+# Goals
+
+### Features & Tasks I want my system to do
+- Smart Home
+  - Lighting
+    - Control lighting
+    - Light Effects
+  - Computer
+    - Do basic pc tasks
+- Productivity
+  - Keep me up to date on calenders
+  - Todo lists
+  - Document logs
+  - Process calculation
+- Entertainment
+  - Speakers
+    - Control Music
+  - Games
+- Communications
+  - Send messages to people
+  - Read incoming messages
+- Routines
+  - Morning routines
+- Information
+  - Weather
+  - Fetch basic queries
+- Personality
+  - Change tone based on input
+  - Remember people
+  - Retain feature requests
+- Input
+  - Vocal Input
+  - Video Gesture
+    - Hand gestures
+    - Sensing
+    - Interactions with irl objects as triggers
+  - Electronic messages
+- Output/Feedback
+  - Speakers
+  - Device messages
+  - Light effects
+  - Displays
+- Software
+  - Install software modules on the fly
