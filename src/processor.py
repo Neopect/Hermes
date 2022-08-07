@@ -4,12 +4,12 @@ import datetime
 import time
 
 import scheduler as shed
-import listener
+import inListener
 
 if __name__=='__main__':
     
 
-    statement = listener.takeCommand().lower()
+    statement = inListener.takeCommand().lower()
     
    # if statement==0:
         #continue

@@ -1,5 +1,8 @@
 # Listener.py - Takes and processes input
 
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
+import nltk
 import json
 import speech_recognition as sr
 import pyttsx3
@@ -46,3 +49,23 @@ def takeCommand(inputType = 'string'):
                 speak("Pardon me, please say that again")
                 return "None"
             return statement
+
+
+def breakdown(phrase, lemmatize = True):
+    # Takes input and parses through nltk then outputs the parsed phrase with lemitizing depending on pram.
+
+    grammar = "NP: {<DT>?<JJ>*<NN>}"
+
+    phrase_words = word_tokenize(phrase)
+    
+    if lemmatize == True:
+        lemmatizer = WordNetLemmatizer()
+        phrase_lemma = [lemmatizer.lemmatize(word) for word in phrase_words] # LATER Ensure words follow proper grammar types
+    else:
+        phrase_lemma = phrase_words
+
+    phrase_tags = nltk.pos_tag(phrase_lemma)
+    chunk_parser = nltk.RegexpParser(grammar)
+    phrase_parsed = chunk_parser.parse(phrase_tags)
+
+    return phrase_parsed
