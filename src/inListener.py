@@ -6,8 +6,9 @@ import nltk
 import json
 import speech_recognition as sr
 import pyttsx3
+import datetime
 
-engine=pyttsx3.init('sapi5')
+engine=pyttsx3.init()
 voices=engine.getProperty('voices')
 engine.setProperty('voice','voices[0].id')
 
@@ -23,8 +24,6 @@ def greetMe():
 # def vocal():
 #     pass
 
-def deconstructor(input):
-    pass
 
 # Processes command
 def takeCommand(inputType = 'string'):
@@ -69,3 +68,27 @@ def breakdown(phrase, lemmatize = True):
     phrase_parsed = chunk_parser.parse(phrase_tags)
 
     return phrase_parsed
+
+test = breakdown("What is the weather in 2 days?")
+print(test)
+print(test[0])
+print(test[1])
+print(test[0][0])
+print(test[0][0][0])
+
+
+def dateTranslator(text, digit):
+    dt_now = datetime.datetime.now()
+    dt_new = None
+
+    if digit != None:
+        pass
+        #Find date plus x days
+
+    if text.contains("today"):
+        dt_new = dt_now
+    elif text.contains("tommorow"):
+        dt_change = datetime.timedelta(days=1)
+        dt_new = dt_now + dt_change
+    
+    return dt_new
