@@ -1,0 +1,18 @@
+# Hermes requirement file
+
+
+# == NLTK ==
+nltk
+nltk.tokenize
+nltk.stem
+
+# == TTS/STT ==
+speech_recognition
+pyttsx3
+
+# == Other ==
+# json
+
+
+# Notes
+# Don't forget to add ntlk packages

@@ -81,10 +81,21 @@ def dateTranslator(text, digit):
     dt_now = datetime.datetime.now()
     dt_new = None
 
-    if digit != None:
-        pass
-        #Find date plus x days
-
+    #Find date "in x days"
+    if any(char.isdigit() for char in text):
+        dt_split = text.split()
+        val = int()
+        
+        for word in dt_split:
+            try:
+                val = int(word)
+            except ValueError:
+                pass
+        
+        dt_change = datetime.timedelta(days=val)
+        dt_new = dt_now + dt_change
+        
+        
     if text.contains("today"):
         dt_new = dt_now
     elif text.contains("tommorow"):
@@ -92,3 +103,4 @@ def dateTranslator(text, digit):
         dt_new = dt_now + dt_change
     
     return dt_new
+
