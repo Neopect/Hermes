@@ -10,6 +10,9 @@ nltk.stem
 speech_recognition
 pyttsx3
 
+# == Packages ==
+wikipedia
+
 # == Other ==
 # json
 
