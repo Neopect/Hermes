@@ -1,6 +1,6 @@
-# Modules Philosophy
+# Plugins Philosophy
 
-Modules are the building bricks of the AI. This structure allows easy construction and modification of modules throughout development. All modules will follow the basic structure guidelines to make installation as simple as possible.
+Plugins are the building bricks of the AI. This structure allows easy construction and modification of plugins throughout development. All plugins will follow the basic structure guidelines to make installation as simple as possible.
 
 ## What is the I/O of a module?
 - Input
@@ -31,4 +31,4 @@ Each module will have access to these items
 - Its own config file
 - A resource folder
 - Scheduler tabs
-- Other modules
+- Other plugins
