@@ -7,7 +7,6 @@ import json
 import speech_recognition as sr
 import pyttsx3
 import datetime
-import requests
 
 engine=pyttsx3.init()
 voices=engine.getProperty('voices')
@@ -18,9 +17,6 @@ def speak(msg):
     engine.say(msg)
     engine.runAndWait()
 
-# Greets user based on conditions
-def greetMe():
-    pass
 
 # def vocal():
 #     pass
@@ -70,10 +66,39 @@ def breakdown(phrase, lemmatize = True):
 
     return phrase_parsed
 
-test = breakdown("What is the weather in 2 days?")
-print(test)
-print(test[0])
-print(test[1])
-print(test[0][0])
-print(test[0][0][0])
+
+def dateTranslator(text, digit):
+    dt_now = datetime.datetime.now()
+    dt_new = None
+
+    #Find date "in x days"
+    if any(char.isdigit() for char in text):
+        dt_split = text.split()
+        val = int()
+        
+        for word in dt_split:
+            try:
+                val = int(word)
+            except ValueError:
+                pass
+        
+        dt_change = datetime.timedelta(days=val)
+        dt_new = dt_now + dt_change
+        
+        
+    if text.contains("today"):
+        dt_new = dt_now
+    elif text.contains("tomorrow"):
+        dt_change = datetime.timedelta(days=1)
+        dt_new = dt_now + dt_change
+    
+    return dt_new
+
+
+# test = breakdown("What is the weather in 2 days?")
+# print(test)
+# print(test[0])
+# print(test[1])
+# print(test[0][0])
+# print(test[0][0][0])
 

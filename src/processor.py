@@ -1,62 +1,73 @@
 # Processor.py - Handles system sub modules for processing requests
 
-import datetime
-import time
+import importlib
+import sys
+import os
+import requests
+from decouple import config
 
 import scheduler as shed
 import inListener
+import textProcess
 
-import requests
-import wikipedia
-import pywhatkit as kit
-from email.message import EmailMessage
-import smtplib
-from decouple import config
+
+current_loc = os.path.dirname(__file__)
+sysPlug_dir = os.path.join(current_loc, "sysPlugs")
+sys.path.append(sysPlug_dir)
+
+
+
+TYPE_ENV = config('SYS_TYPE')
+
+
+plugin_modules = []
+pluginDir = os.listdir("./src/sysPlugs")
+# print(pluginDir)
+
+pluginDir = pluginDir[:-1]
+
+for file in range(len(pluginDir)):
+    if not pluginDir[file].__contains__('.py'):
+        pluginDir.remove(pluginDir[file])
+    else:
+        pluginDir[file] = pluginDir[file].removesuffix('.py')
+    # print(pluginDir)
+    
+
+for plugin in pluginDir:
+    plugin_module = importlib.import_module("sysPlugs." + plugin, ".")
+    # plugin_module = importlib.import_module("." + plugin, "__name__")
+    plugin_modules.append(plugin_module)
+    print(plugin_module)
+
+
+# print(plugin_modules)
+
+
+# plugin = plugin_modules[0].Plugin("hello", key=123)
+
+# result = plugin.execute(5,3)
+# print(result)
+
+
+
+
+def cliBot():
+    tp = textProcess.cliProcessor()
+
+    tp.greet_user()
+    while True:
+            query = tp.take_user_input().lower()
+            query_bd = inListener.breakdown(query)
+            print(query_bd)
+
+
+
 
 if __name__=='__main__':
     
-
-    statement = inListener.takeCommand().lower()
-    
-   # if statement==0:
-        #continue
-
-    #if 
-
-    
-def find_my_ip():
-    ip_address = requests.get('https://api64.ipify.org?format=json').json()
-    return ip_address["ip"]
+    if TYPE_ENV == "CLI":
+        cliBot()
 
 
-def dateTranslator(text, digit):
-    dt_now = datetime.datetime.now()
-    dt_new = None
-
-    #Find date "in x days"
-    if any(char.isdigit() for char in text):
-        dt_split = text.split()
-        val = int()
         
-        for word in dt_split:
-            try:
-                val = int(word)
-            except ValueError:
-                pass
-        
-        dt_change = datetime.timedelta(days=val)
-        dt_new = dt_now + dt_change
-        
-        
-    if text.contains("today"):
-        dt_new = dt_now
-    elif text.contains("tomorrow"):
-        dt_change = datetime.timedelta(days=1)
-        dt_new = dt_now + dt_change
-    
-    return dt_new
-
-
-def search_on_wikipedia(query):
-    results = wikipedia.summary(query, sentences=2)
-    return results
